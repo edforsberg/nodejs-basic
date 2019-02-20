@@ -10,10 +10,10 @@ var db;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 MongoClient.connect(
-  "mongodb://knark:knark@knark-shard-00-00-l9shw.mongodb.net:27017,knark-shard-00-01-l9shw.mongodb.net:27017,knark-shard-00-02-l9shw.mongodb.net:27017/test?ssl=true&replicaSet=Knark-shard-0&authSource=admin&retryWrites=true",
+  "mongodb:/localhost:27017",
   (err, client) => {
     if (err) return console.log(err);
-    db = client.db("knark"); // whatever your database name is
+    db = client.db("Vitboken"); // whatever your database name is
 
     app.listen(3000, function() {
       console.log("listening on 3000");
@@ -22,7 +22,7 @@ MongoClient.connect(
 );
 
 app.get("/", function(req, res) {
-  db.collection("knark")
+  db.collection("Topography")
     .find()
     .toArray(function(err, results) {
       res.render("index.ejs", { knark: results });
